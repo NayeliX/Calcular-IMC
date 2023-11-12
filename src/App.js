@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [result, setResult] = useState(null);
+
+  const calculateBMI = () => {
+    if (weight && height) {
+      const weightInKg = parseFloat(weight);
+      const heightInM = parseFloat(height) / 100; // Convert height to meters
+      const bmi = weightInKg / (heightInM * heightInM);
+
+      setResult(bmi.toFixed(2));
+    } else {
+      setResult(null);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <h1>Calculadora de IMC</h1>
+      <label>
+        Peso (kg):
+        <input
+          type="number"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Altura (cm):
+        <input
+          type="number"
+          value={height}
+          onChange={(e) => setHeight(e.target.value)}
+        />
+      </label>
+      <br />
+      <button onClick={calculateBMI}>Calcular IMC</button>
+      {result !== null && (
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Tu Índice de Masa Corporal (IMC) es: <strong>{result}</strong>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      )}
     </div>
   );
-}
+};
 
 export default App;
