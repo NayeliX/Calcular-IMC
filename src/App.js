@@ -17,6 +17,22 @@ const App = () => {
     }
   };
 
+  const getBMIMessage = () => {
+    if (result === null) {
+      return null;
+    }
+
+    const bmi = parseFloat(result);
+
+    if (bmi < 18.5) {
+      return 'Tu peso está bajo. Debes considerar aumentar tu ingesta calórica.';
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+      return '¡Felicidades! Tu peso es saludable. ¡Sigue así!';
+    } else {
+      return 'Tu peso está por encima del rango saludable. Considera hablar con un profesional de la salud.';
+    }
+  };
+
   return (
     <div>
       <h1>Calculadora de IMC</h1>
@@ -40,9 +56,12 @@ const App = () => {
       <br />
       <button onClick={calculateBMI}>Calcular IMC</button>
       {result !== null && (
-        <p>
-          Tu Índice de Masa Corporal (IMC) es: <strong>{result}</strong>
-        </p>
+        <div>
+          <p>
+            Tu Índice de Masa Corporal (IMC) es: <strong>{result}</strong>
+          </p>
+          <p>{getBMIMessage()}</p>
+        </div>
       )}
     </div>
   );
