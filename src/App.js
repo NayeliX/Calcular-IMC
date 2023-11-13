@@ -9,7 +9,7 @@ const App = () => {
   const calculateBMI = () => {
     if (weight && height) {
       const weightInKg = parseFloat(weight);
-      const heightInM = parseFloat(height) / 100; // Convert height to meters
+      const heightInM = parseFloat(height) / 100;
       const bmi = weightInKg / (heightInM * heightInM);
 
       setResult(bmi.toFixed(2));
