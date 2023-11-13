@@ -4,6 +4,7 @@ const App = () => {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
   const calculateBMI = () => {
     if (weight && height) {
@@ -12,8 +13,10 @@ const App = () => {
       const bmi = weightInKg / (heightInM * heightInM);
 
       setResult(bmi.toFixed(2));
+      setError(null);
     } else {
       setResult(null);
+      setError('Por favor, completa todos los campos.');
     }
   };
 
@@ -55,6 +58,7 @@ const App = () => {
       </label>
       <br />
       <button onClick={calculateBMI}>Calcular IMC</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       {result !== null && (
         <div>
           <p>
